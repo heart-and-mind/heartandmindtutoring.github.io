@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heart &amp; Mind Tutoring | Every Child Can Learn to Read</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: 'DM Sans', sans-serif; color: #1e2a38; background: #f4f7fb; line-height:1.7; }
+    .hidden { display:none !important; }
+
+    /* HEADER */
+    header {
+      background: #fff;
+      border-bottom: 1.5px solid #dce8f5;
+      position: sticky; top: 0; z-index: 50;
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 76px;
+    }
+    .brand { display:flex; align-items:center; gap:12px; cursor:pointer; text-decoration:none; }
+    .brand img { height:60px; width:60px; object-fit:contain; }
+    .brand-words { display:flex; flex-direction:column; line-height:1.2; }
+    .brand-name { font-family:'Playfair Display',serif; font-size:1.25rem; font-weight:700; color:#1e3a5f; letter-spacing:.01em; }
+    .brand-sub { font-size:11px; color:#4a7fa5; letter-spacing:.06em; margin-top:2px; }
+
+    /* NAV */
+    nav ul { list-style:none; display:flex; flex-direction:row; align-items:center; gap:4px; }
+    nav a {
+      color:#3a6080; text-decoration:none; font-size:14px; font-weight:500;
+      padding:7px 14px; border-radius:7px; transition:background .15s,color .15s; white-space:nowrap;
+    }
+    nav a:hover { background:#eef4fb; color:#1e3a5f; }
+    nav a.active { color:#1e3a5f; background:#ddeaf8; }
+    nav .nav-cta {
+      background: linear-gradient(135deg,#e8621a,#c0392b);
+      color:#fff !important; margin-left:6px; padding:8px 18px; border-radius:8px;
+    }
+    nav .nav-cta:hover { filter:brightness(1.1); background: linear-gradient(135deg,#e8621a,#c0392b) !important; }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(160deg, #1e3a5f 0%, #1a5580 60%, #1a7a9a 100%);
+      padding: 4.5rem 2rem 3.5rem; text-align:center; position:relative; overflow:hidden;
+    }
+    .hero::before {
+      content:''; position:absolute; inset:0; pointer-events:none;
+      background: radial-gradient(ellipse 55% 70% at 15% 60%, rgba(26,157,173,.22) 0%, transparent 65%),
+                  radial-gradient(ellipse 45% 55% at 85% 30%, rgba(232,98,26,.18) 0%, transparent 65%);
+    }
+    .hero-badge {
+      display:inline-block; font-size:11px; font-weight:500; letter-spacing:.14em;
+      text-transform:uppercase; color:#6de3f4;
+      background:rgba(109,227,244,.12); border:1px solid rgba(109,227,244,.3);
+      padding:.3rem 1rem; border-radius:50px; margin-bottom:1.5rem; position:relative;
+    }
+    .hero h1 { font-family:'Playfair Display',serif; font-size:clamp(2rem,4.5vw,3.2rem); font-weight:700; color:#fff; line-height:1.2; margin-bottom:1.1rem; position:relative; }
+    .hero h1 em { font-style:italic; color:#7de6f5; }
+    .hero-lead { font-size:1.05rem; color:#a8cde0; max-width:580px; margin:0 auto 2.2rem; line-height:1.75; position:relative; }
+    .hero-btns { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; position:relative; }
+    .btn-main {
+      display:inline-block; background:linear-gradient(135deg,#e8621a,#c0392b);
+      color:#fff; padding:.8rem 1.9rem; border-radius:8px; font-size:.95rem; font-weight:600;
+      text-decoration:none; transition:filter .2s,transform .2s; font-family:'DM Sans',sans-serif;
+    }
+    .btn-main:hover { filter:brightness(1.12); transform:translateY(-2px); }
+    .btn-ghost {
+      display:inline-block; background:transparent; color:#fff;
+      padding:.8rem 1.9rem; border-radius:8px; font-size:.95rem; font-weight:600;
+      border:1.5px solid rgba(255,255,255,.35); text-decoration:none;
+      transition:border-color .2s,background .2s;
+    }
+    .btn-ghost:hover { border-color:#fff; background:rgba(255,255,255,.08); }
+
+    /* TRUST STRIP */
+    .trust { background:#fff; border-bottom:1px solid #dce8f5; padding:.9rem 2rem; }
+    .trust-row { display:flex; flex-wrap:wrap; justify-content:center; gap:1.8rem; }
+    .trust-item { display:flex; align-items:center; gap:7px; font-size:13px; color:#4a6070; font-weight:500; }
+    .trust-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+
+    /* PAGE WRAP */
+    .page-wrap { max-width:1100px; margin:0 auto; padding:3rem 2rem 5rem; }
+
+    /* SECTION META */
+    .sec-label { font-size:11px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#1a9dad; margin-bottom:.5rem; }
+    .sec-title { font-family:'Playfair Display',serif; font-size:clamp(1.6rem,3vw,2.2rem); font-weight:700; color:#1e3a5f; line-height:1.25; margin-bottom:.9rem; }
+    .sec-lead { font-size:1rem; color:#5c6b7a; max-width:580px; line-height:1.75; }
+
+    /* S2P GRID */
+    .s2p-grid { display:grid; grid-template-columns:1fr 1fr; gap:3rem; margin-bottom:3.5rem; align-items:start; }
+    .s2p-text p { color:#3a4a56; font-size:.97rem; margin-bottom:.95rem; line-height:1.75; }
+    .s2p-text strong { color:#1e3a5f; }
+    .s2p-list { list-style:none; margin:1rem 0; }
+    .s2p-list li { display:flex; align-items:flex-start; gap:9px; font-size:.93rem; color:#3a4a56; margin-bottom:.55rem; }
+    .s2p-list li::before { content:''; width:7px; height:7px; border-radius:50%; background:#4caf50; margin-top:6px; flex-shrink:0; }
+
+    /* RESEARCH PANEL */
+    .research-panel { background:#1e3a5f; border-radius:14px; padding:1.75rem; }
+    .research-panel h3 { font-family:'Playfair Display',serif; font-size:1.15rem; font-weight:700; color:#fff; margin-bottom:1.2rem; }
+    .r-link {
+      display:block; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.13);
+      border-radius:9px; padding:.9rem 1.1rem; margin-bottom:.7rem; text-decoration:none;
+      color:#b8d4e8; font-size:.86rem; line-height:1.55; transition:background .2s,color .2s;
+    }
+    .r-link:hover { background:rgba(255,255,255,.14); color:#fff; }
+    .r-link strong { display:block; color:#6dd6ee; font-size:.78rem; letter-spacing:.04em; margin-bottom:3px; }
+
+    /* WHO */
+    .who-box { background:#fff; border-radius:14px; padding:2.5rem; margin-bottom:3rem; border:1px solid #dce8f5; }
+    .who-box p { color:#3a4a56; font-size:.97rem; margin-bottom:.95rem; line-height:1.75; }
+    .who-box p:last-child { margin-bottom:0; }
+
+    /* SERVICES */
+    .svc-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; margin-bottom:3.5rem; }
+    .svc-card { background:#fff; border-radius:14px; padding:1.75rem; border:1px solid #dce8f5; position:relative; overflow:hidden; transition:transform .25s,box-shadow .25s; }
+    .svc-card:hover { transform:translateY(-4px); box-shadow:0 12px 32px rgba(0,0,0,.09); }
+    .svc-card::before { content:''; position:absolute; top:0;left:0;right:0; height:4px; }
+    .svc-card:nth-child(1)::before { background:linear-gradient(90deg,#c0392b,#e8621a); }
+    .svc-card:nth-child(2)::before { background:linear-gradient(90deg,#2176ae,#1a9dad); }
+    .svc-card:nth-child(3)::before { background:linear-gradient(90deg,#4caf50,#8bc34a); }
+    .svc-icon { font-size:2rem; margin-bottom:.8rem; }
+    .svc-card h3 { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; color:#1e3a5f; margin-bottom:.55rem; }
+    .svc-card p { font-size:.88rem; color:#5c6b7a; line-height:1.65; }
+
+    /* ABOUT */
+    .about-wrap { max-width:760px; }
+    .about-wrap h3 { font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:700; color:#1e3a5f; margin:1.8rem 0 .7rem; }
+    .about-wrap p { color:#3a4a56; font-size:.97rem; margin-bottom:1rem; line-height:1.75; }
+    .equity-box {
+      background:linear-gradient(135deg,#edf8f0,#e6f3fb);
+      border-left:4px solid #4caf50; border-radius:0 12px 12px 0;
+      padding:1.75rem 1.75rem .9rem; margin:1.75rem 0;
+    }
+    .equity-box h3 { color:#2e7d32 !important; margin-top:0 !important; }
+
+    /* BLOG */
+    .blog-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1.25rem; }
+    .blog-card { background:#fff; border-radius:14px; padding:1.6rem; border:1px solid #dce8f5; transition:transform .25s,box-shadow .25s; }
+    .blog-card:hover { transform:translateY(-4px); box-shadow:0 12px 28px rgba(0,0,0,.08); }
+    .btag { display:inline-block; font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; padding:3px 10px; border-radius:50px; margin-bottom:.85rem; }
+    .t-sci  { background:#ddeef9; color:#0d4f82; }
+    .t-dys  { background:#fce8e6; color:#8b1a1a; }
+    .t-par  { background:#e5f5e8; color:#1b5e20; }
+    .t-mth  { background:#ede8f8; color:#3d1e7a; }
+    .t-equ  { background:#ddf5f5; color:#0a4f55; }
+    .t-brn  { background:#fff0e0; color:#7a3b00; }
+    .t-suc  { background:#e8f5e2; color:#2a5e0a; }
+    .blog-card h3 { font-family:'Playfair Display',serif; font-size:1rem; font-weight:700; color:#1e3a5f; line-height:1.4; margin-bottom:.55rem; }
+    .blog-card p  { font-size:.85rem; color:#5c6b7a; line-height:1.65; }
+
+    /* CONTACT */
+    .contact-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; margin-top:2rem; }
+    .contact-card { background:#fff; border-radius:14px; padding:1.75rem; border:1px solid #dce8f5; }
+    .contact-card h3 { font-family:'Playfair Display',serif; font-size:1.05rem; font-weight:700; color:#1e3a5f; margin-bottom:.8rem; padding-bottom:.7rem; border-bottom:1.5px solid #edf1f7; }
+    .contact-card p { font-size:.9rem; color:#3a4a56; line-height:1.7; }
+    .contact-card a { color:#2176ae; text-decoration:none; }
+    .contact-card a:hover { text-decoration:underline; }
+
+    /* FOOTER */
+    footer { background:#1e3a5f; color:#7aaac8; text-align:center; padding:1.75rem; font-size:13px; }
+
+    @media(max-width:780px) {
+      .s2p-grid,.svc-grid,.contact-grid { grid-template-columns:1fr; }
+      header { padding:0 1rem; }
+      nav a { font-size:12px; padding:6px 9px; }
+      .brand-name { font-size:1.05rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="brand" onclick="show('home')">
+    <img src="Color-best_logo.JPG" alt="Heart and Mind Tutoring logo">
+    <div class="brand-words">
+      <span class="brand-name">Heart &amp; Mind Tutoring</span>
+      <span class="brand-sub">Helping Struggling Readers Thrive</span>
+    </div>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="#" id="nb-home" class="active" onclick="show('home'); return false;">Home</a></li>
+      <li><a href="#" id="nb-about" onclick="show('about'); return false;">About</a></li>
+      <li><a href="#" id="nb-blog" onclick="show('blog'); return false;">Blog</a></li>
+      <li><a href="#" id="nb-contact" class="nav-cta" onclick="show('contact'); return false;">Get Started</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div id="hero-wrap">
+  <div class="hero">
+    <div class="hero-badge">Science-Based Reading Instruction</div>
+    <h1>Every Child<br><em>Can Learn to Read</em></h1>
+    <p class="hero-lead">Using Speech-to-Print linguistic phonics to help elementary and middle school students who struggle with traditional reading become confident, skilled readers.</p>
+    <div class="hero-btns">
+      <a href="#" class="btn-main" onclick="show('contact'); return false;">Schedule a Consultation</a>
+      <a href="#" class="btn-ghost" onclick="show('about'); return false;">Our Mission</a>
+    </div>
+  </div>
+  <div class="trust">
+    <div class="trust-row">
+      <div class="trust-item"><span class="trust-dot" style="background:#e8621a"></span>Dyslexia Specialists</div>
+      <div class="trust-item"><span class="trust-dot" style="background:#1a9dad"></span>Science of Reading Methods</div>
+      <div class="trust-item"><span class="trust-dot" style="background:#4caf50"></span>Pro Bono School Partnerships</div>
+      <div class="trust-item"><span class="trust-dot" style="background:#2176ae"></span>In-Person &amp; Online</div>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="page-wrap">
+
+    <!-- HOME -->
+    <div id="pg-home">
+      <div style="margin-bottom:1.75rem">
+        <div class="sec-label">Our Approach</div>
+        <h2 class="sec-title">The Speech-to-Print Advantage</h2>
+        <p class="sec-lead">A fundamentally different — and more effective — path to reading fluency.</p>
+      </div>
+      <div class="s2p-grid">
+        <div class="s2p-text">
+          <p>Speech-to-Print (S2P), also known as Linguistic Phonics, recognizes a fundamental truth: <strong>oral speech is natural and develops automatically, while reading must be explicitly taught.</strong></p>
+          <p>This approach honors what students already know — the sounds of their spoken language — and systematically connects those familiar sounds to their written forms. We start with sounds students can already produce and hear.</p>
+          <p><strong>Why this works better than print-focused phonics:</strong></p>
+          <ul class="s2p-list">
+            <li>Builds on existing oral language strengths</li>
+            <li>Follows the brain's natural language processing pathway</li>
+            <li>Creates deeper phonemic awareness</li>
+            <li>More intuitive for struggling readers</li>
+            <li>Especially effective for students with dyslexia</li>
+          </ul>
+          <p>This method is grounded in decades of research from the Science of Reading about how the brain most efficiently learns written language.</p>
+        </div>
+        <div class="research-panel">
+          <h3>Learn More About the Science</h3>
+          <a href="https://www.aetonline.org/images/MEMBER_CENTER_Section/Journal_Docs/2023/44-2/Fall2023_03_ASpeech-to-PrintLinguisticPhonicsApproach-Fein.pdf" target="_blank" class="r-link">
+            <strong>Academic Excellence Today</strong>A Speech-to-Print Linguistic Phonics Approach
+          </a>
+          <a href="https://www.understood.org/en/articles/the-science-of-reading-what-you-need-to-know" target="_blank" class="r-link">
+            <strong>Understood.org</strong>The Science of Reading Explained
+          </a>
+          <a href="https://www.sciencedirect.com/science/article/pii/S0022096520300588" target="_blank" class="r-link">
+            <strong>Research Study</strong>Linguistic Phonics vs. Traditional Methods
+          </a>
+        </div>
+      </div>
+
+      <div class="who-box">
+        <div class="sec-label">Students We Support</div>
+        <h2 class="sec-title" style="font-size:1.7rem;margin-bottom:1rem">Who We Serve</h2>
+        <p>The students I work with have not been able to learn to read or read well through general classroom instruction. They may have been diagnosed with a learning disorder such as dyslexia, or they may simply exhibit some of the characteristics consistent with learning challenges.</p>
+        <p>My Speech-to-Print instruction is specifically designed to bring their reading grade level up as far and as quickly as possible. For students with moderate to severe dyslexia, we can also discuss accommodations and adaptations that can further empower their learning.</p>
+        <p>While I can teach these students to read effectively, I recognize that for some learners with significant reading challenges, relying solely on reading for academic success may not be the most effective approach. We work together to develop comprehensive strategies that support overall academic growth.</p>
+      </div>
+
+      <div style="margin-bottom:1.5rem">
+        <div class="sec-label">What We Offer</div>
+        <h2 class="sec-title">Our Services</h2>
+      </div>
+      <div class="svc-grid">
+        <div class="svc-card">
+          <div class="svc-icon">🗣️</div>
+          <h3>Speech-to-Print Instruction</h3>
+          <p>Systematic linguistic phonics starting with familiar speech sounds, connected to written forms. Designed for struggling readers based on Science of Reading research.</p>
+        </div>
+        <div class="svc-card">
+          <div class="svc-icon">🧠</div>
+          <h3>Learning Difference Support</h3>
+          <p>Specialized instruction for students with dyslexia and other reading challenges, including discussion of accommodations and adaptations for academic success.</p>
+        </div>
+        <div class="svc-card">
+          <div class="svc-icon">🏫</div>
+          <h3>School Partnerships</h3>
+          <p>Working directly in schools to support students through evidence-based Speech-to-Print methods, including pro bono placements for students who need it most.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <div id="pg-about" class="hidden">
+      <div class="about-wrap">
+        <div class="sec-label">Our Story</div>
+        <h2 class="sec-title">About Heart &amp; Mind Tutoring</h2>
+        <p style="color:#5c6b7a;font-size:1.02rem;margin-bottom:1.75rem">Founded on the belief that every child deserves access to high-quality, evidence-based reading instruction — regardless of their family's financial circumstances.</p>
+        <h3>Our Educational Philosophy</h3>
+        <p>Our instruction is grounded in the Science of Reading — decades of research on how children's brains actually learn to read. We use Speech-to-Print methods because they work with the brain's natural language processing systems, creating stronger, more confident readers than traditional approaches.</p>
+        <p>We recognize that oral speech develops naturally while reading and writing must be explicitly taught. Our methods honor this by building on what students already know — their spoken language — to systematically teach the written code.</p>
+        <div class="equity-box">
+          <h3>Our Equity Mission</h3>
+          <p><strong>School-Based Pro Bono Work:</strong> A significant portion of our work takes place directly in elementary and middle schools, where we provide free tutoring to students who need additional support or express a strong interest in learning to read better.</p>
+          <p><strong>Student-Initiated Support:</strong> We believe students know when they need help. Our school partnerships are designed so that students themselves can request tutoring support, ensuring motivated learners get help regardless of other factors.</p>
+          <p><strong>Balancing Access and Sustainability:</strong> Like Robin Hood redistributing wealth, we balance paid tutoring services with pro bono work — maintaining high-quality instruction while ensuring financial barriers never prevent a student from getting the support they need.</p>
+        </div>
+        <h3>Why This Matters</h3>
+        <p>Reading is the gateway to all other learning. When students struggle with reading in early grades, they often continue to struggle across all subjects. By providing evidence-based Speech-to-Print instruction, we're not just teaching students to read — we're opening doors to lifelong learning and opportunity.</p>
+        <h3>Making a Difference</h3>
+        <p>Every child we work with — whether through paid services or pro bono school partnerships — receives the same high-quality, science-based instruction. We're committed to leveling the educational playing field, one student at a time.</p>
+      </div>
+    </div>
+
+    <!-- BLOG -->
+    <div id="pg-blog" class="hidden">
+      <div style="margin-bottom:2rem">
+        <div class="sec-label">Resources &amp; Insights</div>
+        <h2 class="sec-title">Blog</h2>
+        <p class="sec-lead">Insights on reading instruction, the Science of Reading, and supporting struggling learners.</p>
+      </div>
+      <div class="blog-grid">
+        <div class="blog-card"><span class="btag t-sci">Science of Reading</span><h3>What Is Speech-to-Print and How Is It Different from Traditional Phonics?</h3><p>Most phonics programs start with letters and teach children what sounds they make. Speech-to-Print flips that — here's why the difference matters enormously for struggling readers.</p></div>
+        <div class="blog-card"><span class="btag t-dys">Dyslexia</span><h3>Signs Your Child May Have Dyslexia — and What to Do Next</h3><p>Many families notice something is "off" long before a formal diagnosis. Learn the early indicators and how evidence-based tutoring can help right now, regardless of a diagnosis.</p></div>
+        <div class="blog-card"><span class="btag t-par">For Parents</span><h3>Why "Just Read More" Doesn't Work for Struggling Readers</h3><p>Well-meaning advice to read more at home can actually deepen frustration for children with decoding difficulties. Here's what actually moves the needle.</p></div>
+        <div class="blog-card"><span class="btag t-mth">Methodology</span><h3>Speech-to-Print vs. Orton-Gillingham: Understanding the Difference</h3><p>Both approaches are rooted in structured literacy, but travel in opposite directions. We explain why starting from sound rather than symbol is a game-changer for many learners.</p></div>
+        <div class="blog-card"><span class="btag t-equ">Equity</span><h3>The Reading Gap Is an Equity Crisis — and What Tutors Can Do About It</h3><p>Children in under-resourced schools are far less likely to receive specialized reading instruction. Here's why that matters and how our pro bono model is designed to help.</p></div>
+        <div class="blog-card"><span class="btag t-brn">Brain &amp; Language</span><h3>How the Brain Actually Learns to Read: A Plain-Language Overview</h3><p>Reading is not natural — the brain has to rewire itself to do it. Understanding this process explains why some children struggle and why certain teaching methods work far better.</p></div>
+        <div class="blog-card"><span class="btag t-par">For Parents</span><h3>Questions to Ask Your Child's School About Reading Instruction</h3><p>Empower yourself with the right questions to determine whether your child's school is using science-based methods — and what to do if it isn't.</p></div>
+        <div class="blog-card"><span class="btag t-sci">Phonemic Awareness</span><h3>What Is Phonemic Awareness and Why Is It the Foundation of Reading?</h3><p>Before children can decode written words, they need to hear and manipulate the sounds inside spoken words. Here's how Speech-to-Print builds this skill naturally.</p></div>
+        <div class="blog-card"><span class="btag t-mth">Accommodations</span><h3>Beyond Decoding: Strategies for Students with Significant Reading Challenges</h3><p>For students with moderate to severe dyslexia, reading instruction is essential — but so are smart accommodations. Here's how to think holistically about academic success.</p></div>
+        <div class="blog-card"><span class="btag t-suc">Success Stories</span><h3>What Progress Really Looks Like: Milestones in a Struggling Reader's Journey</h3><p>Progress for struggling readers isn't always linear, but it is measurable. Real milestones families can watch for when using Speech-to-Print instruction.</p></div>
+      </div>
+    </div>
+
+    <!-- CONTACT -->
+    <div id="pg-contact" class="hidden">
+      <div class="sec-label">Reach Out</div>
+      <h2 class="sec-title">Get Started with Heart &amp; Mind Tutoring</h2>
+      <p class="sec-lead">We'd love to connect — whether you're a family seeking support or a school looking to partner.</p>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <h3>For Families</h3>
+          <p>Email: <a href="mailto:hello@heartandmindtutoring.com">hello@heartandmindtutoring.com</a><br><br>
+          Phone: (555) 123-4567<br><br>
+          We offer flexible scheduling and work with families to find sustainable pricing options.</p>
+        </div>
+        <div class="contact-card">
+          <h3>For Schools</h3>
+          <p>Partner with us to provide additional reading support for your students using evidence-based Speech-to-Print methods.<br><br>
+          Contact us to discuss how we can support student-initiated tutoring requests.</p>
+        </div>
+        <div class="contact-card">
+          <h3>Service Areas</h3>
+          <p>In-person tutoring<br>
+          Online sessions via Zoom<br>
+          School-based partnerships<br>
+          Library meeting rooms</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  &copy; 2025 Heart &amp; Mind Tutoring — Science-based reading instruction and educational equity for every student.
+</footer>
+
+<script>
+  function show(page) {
+    ['home','about','blog','contact'].forEach(function(p) {
+      document.getElementById('pg-'+p).classList.add('hidden');
+      var nb = document.getElementById('nb-'+p);
+      if (nb) nb.classList.remove('active');
+    });
+    document.getElementById('pg-'+page).classList.remove('hidden');
+    var active = document.getElementById('nb-'+page);
+    if (active) active.classList.add('active');
+    document.getElementById('hero-wrap').style.display = page === 'home' ? '' : 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
